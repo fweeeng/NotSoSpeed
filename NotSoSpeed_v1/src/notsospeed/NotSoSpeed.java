@@ -1,32 +1,34 @@
 package notsospeed;
 
-import javax.swing.*;
-import java.awt.event.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.awt.*;
-
 public class NotSoSpeed {
 
 	public static void main(String[] args) {
-		//Timers
+		
+		
+		//-----------GAMEPLAY------------
+		System.out.println("Welcome to Not So Speed!");
 		//4 decks
 		//Create playing deck
-		Deck playDeck = new Deck();
+		Deck playDeck = new DrawDeck();
 		playDeck.createFullDeck();
-		//playDeck.shuffle();
-		Deck handDeck = new Deck();
+		playDeck.shuffle();
 		
-		//Deck sideDeckLeft = new Deck();
+		Deck handDeck = new HandDeck(5);
+		//handDeck.creatFullDeck(); overriden method
+		Deck leftDeck = new TableDeck();
+		Deck rightDeck = new TableDeck();
 		
-		//Deck sideDeckRight = new Deck();
-		
+		boolean play = true;
+		while(play)
+		{
+			
+		}
 		//test
 		//System.out.println(playDeck);
 		
 		
 		
+		/*
 		  //-----------------JAVA SWING GUI----------------
 			
 			JFrame frame1 = new JFrame("Not So Speed");
@@ -97,7 +99,7 @@ public class NotSoSpeed {
 			frame1.setVisible(true);
 			//frame1.pack();
 		 
-
+	*/
 
 		
 		

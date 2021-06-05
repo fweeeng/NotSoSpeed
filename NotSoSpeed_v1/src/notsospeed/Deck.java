@@ -12,9 +12,8 @@ public class Deck
 	public Deck()
 	{
 		cards = new ArrayList<Card>();
-		this.cards = cards;
 	}//end constructor
-	
+		
 	//loop thru the full deck(suit*value)
 	public void createFullDeck()
 	{
@@ -30,7 +29,7 @@ public class Deck
 	
 	public void shuffle()
 	{
-		ArrayList<Card> offDeck = new ArrayList<Card>();
+		ArrayList<Card> offDeck = new ArrayList<Card>(); //deck off to the side to use as storage
 		//use random
 		Random random = new Random();
 		int randomCardIndex = 0;
@@ -68,11 +67,16 @@ public class Deck
 		cards.add(drawFrom.getCard(0));
 	}//end draw method
 	
+	public int cardsValue()
+	{
+		int total = 0;
+		return total;
+	}
 	
 	
 	public String toString()
 	{
-		String cardListOutput = "";
+		String listOfCards = "";
 		int i = 0;
 		
 		//REMOVE OR FIX
@@ -82,12 +86,12 @@ public class Deck
 //			cardListOutput += "\n" + i + " " + aCard.toString();
 //		}
 		
-		for(Card aCard: cards)
+		for(Card c: cards)
 		{
-			cardListOutput += "\n" + i + " " + aCard.toString();
+			listOfCards += "\n" + i + " " + c.toString();
 			i++;
 		}
-		return cardListOutput;
+		return listOfCards;
 	}
 	
 }
