@@ -7,25 +7,17 @@ public class Deck
 {
 	//instance variables
 	private ArrayList<Card> cards;
+	private String type;
 	
 	//constructor
-	public Deck()
+	public Deck(String type)
 	{
-		cards = new ArrayList<Card>();
+		setCards(new ArrayList<Card>());
+		this.type = type;
 	}//end constructor
 		
 	//loop thru the full deck(suit*value)
-	public void createFullDeck()
-	{
-		for(Suit cardSuit: Suit.values())
-		{
-			for(Value cardValue: Value.values())
-			{
-				//add NEW cards to the list
-				cards.add(new Card(cardSuit,cardValue));
-			}
-		}
-	}
+	
 	
 	public void shuffle()
 	{
@@ -34,42 +26,109 @@ public class Deck
 		Random random = new Random();
 		int randomCardIndex = 0;
 		//get size of deck
-		int originalSize = cards.size();
+		int originalSize = getCards().size();
 		for(int i = 0; i < originalSize; i++)
 		{
 			//generate random index: rand.nextInt((max - min) + 1) + min(0)
-			randomCardIndex = random.nextInt((cards.size()-1 - 0) + 1) + 0;
-			offDeck.add(cards.get(randomCardIndex));
+			randomCardIndex = random.nextInt((getCards().size()-1 - 0) + 1) + 0;//second source
+			offDeck.add(getCards().get(randomCardIndex));
 			//remove from original deck
-			cards.remove(randomCardIndex);
+			getCards().remove(randomCardIndex);
 		}
-		cards = offDeck;
+		setCards(offDeck);
 	}//end shuffle method
 	
-	public void addCard(Card plus)
+	public ArrayList<Card> getCards() 
 	{
-		cards.add(plus);
+		return cards;
 	}
 	
-	public void removeCard(Card minus)
+	public void setCards(ArrayList<Card> cards) 
 	{
-		cards.remove(minus);
+		this.cards = cards;
+	}
+
+	
+	public void addCard(Card c)
+	{
+		getCards().add(c);
+	}
+	
+	public Card removeCard(int i)
+	{
+		return getCards().remove(i);
+	}
+	
+	public Card removeCard()
+	{
+		return removeCard(cards.size()-1);//removes last card from cards
+	}
+	
+	public boolean isEmpty()
+	{
+		return getCards().isEmpty();
+	}
+	
+	public int size()
+	{
+		return getCards().size();
 	}
 	
 	public Card getCard(int i)
 	{
-		return cards.get(i);
+		return getCards().get(i);
+	}
+	
+	public Card getLast()
+	{
+		return cards.get(cards.size()-1);
+	}
+	
+	public String getType()
+	{
+		return type;
 	}
 	
 	//draw a card from the deck
-	public void draw(Deck drawFrom)
+	public void draw(Deck drawOut)
 	{
-		cards.add(drawFrom.getCard(0));
+		getCards().add(drawOut.getCard(0)); 
+		drawOut.removeCard(0); //remove so that the first card isn't the same for all objects
 	}//end draw method
 	
-	public int cardsValue()
+	//KEY METHOD TO HANDING OUT CARDS
+	public void deal(Deck d, int j)
+	{
+		for(int i = 0; i < j; i++)
+		{
+			Card c = removeCard();
+			d.addCard(c);
+		}
+	}
+	
+	public int cardTotal()
 	{
 		int total = 0;
+		for(Card card : getCards())
+		{
+			switch(card.getValue())
+			{
+			case ACE: total += 1;
+			case TWO: total += 2;
+			case THREE: total += 3;
+			case FOUR: total += 4;
+			case FIVE: total += 5;
+			case SIX: total += 6;
+			case SEVEN: total += 7;
+			case EIGHT: total += 8;
+			case NINE: total += 9;
+			case TEN: total += 10;
+			case JACK: total += 10;
+			case QUEEN: total += 10;
+			case KING: total += 10;
+			}
+			
+		}
 		return total;
 	}
 	
@@ -77,21 +136,13 @@ public class Deck
 	public String toString()
 	{
 		String listOfCards = "";
-		int i = 0;
 		
-		//REMOVE OR FIX
-//		Card aCard = new Card();
-//		for(int i = 0; i < cards.size(); i++)
-//		{
-//			cardListOutput += "\n" + i + " " + aCard.toString();
-//		}
-		
-		for(Card c: cards)
+		for(Card c: getCards())
 		{
-			listOfCards += "\n" + i + " " + c.toString();
-			i++;
+			listOfCards += "\n" + c.toString();
 		}
 		return listOfCards;
 	}
+	
 	
 }

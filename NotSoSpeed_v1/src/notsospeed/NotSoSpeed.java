@@ -1,5 +1,7 @@
 package notsospeed;
 
+import java.util.Scanner;
+
 public class NotSoSpeed {
 
 	public static void main(String[] args) {
@@ -9,14 +11,45 @@ public class NotSoSpeed {
 		System.out.println("Welcome to Not So Speed!");
 		//4 decks
 		//Create playing deck
-		Deck playDeck = new DrawDeck();
-		playDeck.createFullDeck();
-		playDeck.shuffle();
+		//Deck playDeck = new DrawDeck();
+		//playDeck.createFullDeck();
+		//playDeck.shuffle();
+		//Scanner scan = new Scanner(System.in);
 		
-		Deck handDeck = new HandDeck(5);
+		//Deck handDeck = new HandDeck(5);
+		//handDeck.draw(playDeck);
+		//handDeck.createFullDeck();
+		//handDeck.validateTotal();
+		//handDeck.createFullDeck();
 		//handDeck.creatFullDeck(); overriden method
-		Deck leftDeck = new TableDeck();
-		Deck rightDeck = new TableDeck();
+		//TableDeck leftDeck = new TableDeck(playDeck);
+		//leftDeck.draw();
+		//Deck rightDeck = new Deck();
+		//rightDeck.draw(playDeck);
+		
+		//System.out.println(playDeck.toString());
+		/*
+		System.out.println("Your card:" + handDeck.toString());
+		System.out.println("Left deck: " + leftDeck.toString());
+		System.out.println("Right deck: " + rightDeck.toString());
+		System.out.println("Place on LEFT deck, RIGHT deck, or DRAW?");
+		String response = scan.nextLine();
+		
+		if(response.equals("left"))
+		{
+		}
+		*/
+		
+		/*
+		 * 1. Create decks
+		 * 2. Display player hand
+		 * 3. Tell player top cards of table decks
+		 * 4. Player decides which card to place in chosen deck
+		 * 5. Check if card can be placed in table deck
+		 * if can place, repeat 2
+		 * if cannot place, say "invalid, choose another card: ", repeat 2
+		 * Display: hand, table deck top card values, draw deck count
+		 */
 		
 		boolean play = true;
 		while(play)
