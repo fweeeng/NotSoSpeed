@@ -4,10 +4,10 @@ public class HandDeck extends Deck {
 
 	private int total;
 	
-	public HandDeck(String type, int total)
+	public HandDeck(String type)
 	{
 		super(type);
-		this.total = total;
+		//this.total = total;
 	}
 	
 	public void show()

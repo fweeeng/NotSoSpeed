@@ -11,17 +11,20 @@ public class NotSoSpeed {
 		System.out.println("Welcome to Not So Speed!");
 		//4 decks
 		//Create playing deck
-		//Deck playDeck = new DrawDeck();
-		//playDeck.createFullDeck();
-		//playDeck.shuffle();
+		DrawDeck drawDeck = new DrawDeck("Draw Deck");
+		drawDeck.shuffle();
 		//Scanner scan = new Scanner(System.in);
 		
-		//Deck handDeck = new HandDeck(5);
+		HandDeck handDeck = new HandDeck("Player Hand");
+		drawDeck.deal(handDeck, 5);
+		handDeck.show();
+		
+		Deck leftover = new Deck("Leftover Deck");
+		drawDeck.dealLeftover(leftover);
+		//return the # of cards left
+		System.out.println("# of cards left: " + leftover.size());
 		//handDeck.draw(playDeck);
-		//handDeck.createFullDeck();
 		//handDeck.validateTotal();
-		//handDeck.createFullDeck();
-		//handDeck.creatFullDeck(); overriden method
 		//TableDeck leftDeck = new TableDeck(playDeck);
 		//leftDeck.draw();
 		//Deck rightDeck = new Deck();

@@ -106,6 +106,11 @@ public class Deck
 		}
 	}
 	
+	public void dealLeftover(Deck d)
+	{
+		deal(d, cards.size());
+	}
+	
 	public int cardTotal()
 	{
 		int total = 0;

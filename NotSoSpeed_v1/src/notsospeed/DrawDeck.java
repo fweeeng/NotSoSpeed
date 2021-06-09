@@ -7,7 +7,7 @@ public class DrawDeck extends Deck
 	public DrawDeck(String type) 
 	{
 		super(type);
-		this.count = count;
+		//this.count = count;
 		this.createFullDeck();
 	}
 	
