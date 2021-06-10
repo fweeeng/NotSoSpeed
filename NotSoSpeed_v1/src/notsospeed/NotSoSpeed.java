@@ -9,7 +9,6 @@ public class NotSoSpeed
 	{
 		
 		
-		//-----------GAMEPLAY------------
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Welcome to Not So Speed!");
 		//include start (optional)
@@ -31,28 +30,39 @@ public class NotSoSpeed
 		
 		Deck leftover = new Deck("Leftover Deck");
 		drawDeck.dealLeftover(leftover);
-		//return the # of cards left
-		System.out.println("# of cards left: " + leftover.size());
-		System.out.println("Hand Card Total: " + handDeck.cardTotal());
-		System.out.println("value of first: " + handDeck.getCard(0).getValue());
 		
-		System.out.println("To place card on deck: ");
-		handDeck.place(0, leftDeck);
+		//TEST AREA
+		//System.out.println("# of cards left: " + leftover.size());
+		//System.out.println("Hand Card Total: " + handDeck.cardTotal());
+		//System.out.println("value of first: " + handDeck.getCard(0).getValue());
+		
+		//System.out.println();
+		//handDeck.place(0, leftDeck);
+		//leftDeck.show();
+		//-----------GAMEPLAY------------
+		//Display hand
+		System.out.println("Left Deck: " + leftDeck.getLast());
+		System.out.println("Right Deck: " + rightDeck.getLast());
 		handDeck.show();
-		leftDeck.show();
-		
-		//System.out.println(playDeck.toString());
-		/*
-		System.out.println("Your card:" + handDeck.toString());
-		System.out.println("Left deck: " + leftDeck.toString());
-		System.out.println("Right deck: " + rightDeck.toString());
-		System.out.println("Place on LEFT deck, RIGHT deck, or DRAW?");
-		String response = scan.nextLine();
-		
-		if(response.equals("left"))
+		System.out.println("Select a card from your hand:");
+		int card = scan.nextInt();
+		System.out.println("Select deck to place card (left = 'l' or right = 'r'):");
+		String deck = scan.next();
+		if(deck.equals("r"))
 		{
+			handDeck.place(card, rightDeck);
 		}
-		*/
+		else if(deck.equals("l"))
+		{
+			handDeck.place(card, leftDeck);
+		}
+		else
+		{
+			System.out.println("Invalid");
+		}
+		
+		
+		
 		
 		/*
 		 * 1. Create decks

@@ -26,12 +26,12 @@ public class HandDeck extends Deck {
 		return total;
 	}
 	
-	public boolean checkPlacement(int index, Deck d)
+	public boolean checkPlacement(int index, Deck deck)
 	{
 		//check if card can be placed on table deck
 		//by comparing card with previous card
 		int handCard = getCard(index).getValue();
-		int tableCard = d.getLast().getValue();
+		int tableCard = deck.getLast().getValue();
 		if(handCard == tableCard + 1 || handCard == tableCard - 1)
 		{
 			System.out.println("it's a go!");
@@ -41,50 +41,20 @@ public class HandDeck extends Deck {
 	}
 	
 	
-	public void place(int index, Deck d)
+	public void place(int index, Deck deck)
 	{
 		//if(checkPlacement() == true)
 		//add card to tableDeck and remove from handDeck
-		if(checkPlacement(index, d))
+		if(checkPlacement(index, deck))
 		{
-			d.addCard(getCard(index));
+			deck.addCard(getCard(index));
 			removeCard(index);
 		}
 		else
 		{
-			System.out.println("false");
+			System.out.println("Cannot place card. Choose another");
 		}
 	}
 	
-	/*
-	@Override
-	public String toString()
-	{
-		String listOfCards = "";
-		int i = 0;
-		
-		for(Card c: handCards)
-		{
-			listOfCards += "\n" + i + " " + c.toString();
-			i++;
-		}
-		return listOfCards;
-	}
-	*/
 
-//OPTIONAL FEATURE
-//	public void validateTotal()
-//	{
-//		boolean val = false;
-//		while(!val)
-//		{
-//			if(total < 9 && total > 2)
-//			{
-//				val = true;
-//			}
-//			System.out.println("Invalid total: only 3-8 cards");
-//		}
-//	}
-	//setters
-	//set total cards
 }

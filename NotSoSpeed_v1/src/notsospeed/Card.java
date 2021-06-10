@@ -29,15 +29,6 @@ public class Card
 	}
 	
 	
-//returns the color of the placed card's suit
-//	public String getColor()
-//	{
-//		if()
-//		{
-//			
-//		}
-//	}
-	
 	public String toString()
 	{
 		return this.suit.toString() + " " + this.value.toString();
