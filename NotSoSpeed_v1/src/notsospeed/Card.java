@@ -12,15 +12,23 @@ public class Card
 		
 	}//end constructor
 	
-	public Value getValue()
+	public int getValue()
 	{
-		return this.value;
+		return value.getValue();
 	}
+	/*
+	public int getVal()
+	{
+		//card = Integer.parseInt(value[i]);
+	}
+	*/
 	
 	public Suit getSuit()
 	{
 		return this.suit;
 	}
+	
+	
 //returns the color of the placed card's suit
 //	public String getColor()
 //	{

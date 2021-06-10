@@ -2,7 +2,6 @@ package notsospeed;
 
 public class DrawDeck extends Deck 
 {
-	private static int count = 0;
 
 	public DrawDeck(String type) 
 	{
@@ -21,14 +20,7 @@ public class DrawDeck extends Deck
 				getCards().add(new Card(cardSuit,cardValue));
 			}
 		}
-	}
-	
-	//display number of cards left to place in table decks
-	public int getCount()
-	{
-		return count;
-	}
-	
+	}	
 	
 
 }

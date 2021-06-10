@@ -2,33 +2,44 @@ package notsospeed;
 
 import java.util.Scanner;
 
-public class NotSoSpeed {
+public class NotSoSpeed 
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		
 		
 		//-----------GAMEPLAY------------
+		Scanner scan = new Scanner(System.in);
 		System.out.println("Welcome to Not So Speed!");
+		//include start (optional)
 		//4 decks
 		//Create playing deck
-		DrawDeck drawDeck = new DrawDeck("Draw Deck");
+		Deck drawDeck = new DrawDeck("Draw Deck");
 		drawDeck.shuffle();
-		//Scanner scan = new Scanner(System.in);
 		
 		HandDeck handDeck = new HandDeck("Player Hand");
 		drawDeck.deal(handDeck, 5);
 		handDeck.show();
 		
+		
+		Deck leftDeck = new TableDeck("Left Deck");
+		drawDeck.deal(leftDeck, 1);
+		
+		Deck rightDeck = new TableDeck("Right Deck");
+		drawDeck.deal(rightDeck, 1);
+		
 		Deck leftover = new Deck("Leftover Deck");
 		drawDeck.dealLeftover(leftover);
 		//return the # of cards left
 		System.out.println("# of cards left: " + leftover.size());
-		//handDeck.draw(playDeck);
-		//handDeck.validateTotal();
-		//TableDeck leftDeck = new TableDeck(playDeck);
-		//leftDeck.draw();
-		//Deck rightDeck = new Deck();
-		//rightDeck.draw(playDeck);
+		System.out.println("Hand Card Total: " + handDeck.cardTotal());
+		System.out.println("value of first: " + handDeck.getCard(0).getValue());
+		
+		System.out.println("To place card on deck: ");
+		handDeck.place(0, leftDeck);
+		handDeck.show();
+		leftDeck.show();
 		
 		//System.out.println(playDeck.toString());
 		/*
@@ -54,13 +65,6 @@ public class NotSoSpeed {
 		 * Display: hand, table deck top card values, draw deck count
 		 */
 		
-		boolean play = true;
-		while(play)
-		{
-			
-		}
-		//test
-		//System.out.println(playDeck);
 		
 		
 		

@@ -26,6 +26,35 @@ public class HandDeck extends Deck {
 		return total;
 	}
 	
+	public boolean checkPlacement(int index, Deck d)
+	{
+		//check if card can be placed on table deck
+		//by comparing card with previous card
+		int handCard = getCard(index).getValue();
+		int tableCard = d.getLast().getValue();
+		if(handCard == tableCard + 1 || handCard == tableCard - 1)
+		{
+			System.out.println("it's a go!");
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public void place(int index, Deck d)
+	{
+		//if(checkPlacement() == true)
+		//add card to tableDeck and remove from handDeck
+		if(checkPlacement(index, d))
+		{
+			d.addCard(getCard(index));
+			removeCard(index);
+		}
+		else
+		{
+			System.out.println("false");
+		}
+	}
 	
 	/*
 	@Override
@@ -43,7 +72,7 @@ public class HandDeck extends Deck {
 	}
 	*/
 
-	
+//OPTIONAL FEATURE
 //	public void validateTotal()
 //	{
 //		boolean val = false;
@@ -56,19 +85,6 @@ public class HandDeck extends Deck {
 //			System.out.println("Invalid total: only 3-8 cards");
 //		}
 //	}
-	
-	/*
-	public void placeCard(TableDeck TBDeck)
-	{
-		TBDeck.removeCard
-	}
-	*/
-	
 	//setters
 	//set total cards
-//	public void setTotal(int total)
-//	{
-//		this.total = total;
-//	}
-
 }

@@ -15,8 +15,18 @@ public class Deck
 		setCards(new ArrayList<Card>());
 		this.type = type;
 	}//end constructor
-		
-	//loop thru the full deck(suit*value)
+			
+	//REMOVE LATER
+	public void show()
+	{
+		System.out.println(getType() + ": ");
+		for(int i = 0; i < size(); i++)
+		{
+			System.out.println(getCard(i));
+		}
+		System.out.println();
+	}
+	
 	
 	
 	public void shuffle()
@@ -43,6 +53,21 @@ public class Deck
 		return cards;
 	}
 	
+	public Card getCard(int i)
+	{
+		return getCards().get(i);
+	}
+	
+	public Card getLast()
+	{
+		return cards.get(cards.size()-1);
+	}
+	
+	public String getType()
+	{
+		return type;
+	}
+	
 	public void setCards(ArrayList<Card> cards) 
 	{
 		this.cards = cards;
@@ -66,27 +91,12 @@ public class Deck
 	
 	public boolean isEmpty()
 	{
-		return getCards().isEmpty();
+		return getCards().isEmpty();//checks if there are no more cards
 	}
 	
 	public int size()
 	{
 		return getCards().size();
-	}
-	
-	public Card getCard(int i)
-	{
-		return getCards().get(i);
-	}
-	
-	public Card getLast()
-	{
-		return cards.get(cards.size()-1);
-	}
-	
-	public String getType()
-	{
-		return type;
 	}
 	
 	//draw a card from the deck
@@ -116,26 +126,11 @@ public class Deck
 		int total = 0;
 		for(Card card : getCards())
 		{
-			switch(card.getValue())
-			{
-			case ACE: total += 1;
-			case TWO: total += 2;
-			case THREE: total += 3;
-			case FOUR: total += 4;
-			case FIVE: total += 5;
-			case SIX: total += 6;
-			case SEVEN: total += 7;
-			case EIGHT: total += 8;
-			case NINE: total += 9;
-			case TEN: total += 10;
-			case JACK: total += 10;
-			case QUEEN: total += 10;
-			case KING: total += 10;
-			}
-			
+			total+=card.getValue();
 		}
 		return total;
 	}
+	
 	
 	
 	public String toString()
