@@ -1,6 +1,24 @@
 package notsospeed;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Scanner;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class NotSoSpeed 
 {
@@ -41,6 +59,7 @@ public class NotSoSpeed
 		//leftDeck.show();
 		//-----------GAMEPLAY------------
 		//Display hand
+		/*
 		System.out.println("Left Deck: " + leftDeck.getLast());
 		System.out.println("Right Deck: " + rightDeck.getLast());
 		handDeck.show();
@@ -60,6 +79,7 @@ public class NotSoSpeed
 		{
 			System.out.println("Invalid");
 		}
+		*/
 		
 		
 		
@@ -78,48 +98,105 @@ public class NotSoSpeed
 		
 		
 		
-		/*
+		
 		  //-----------------JAVA SWING GUI----------------
 			
 			JFrame frame1 = new JFrame("Not So Speed");
 			frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //MUST HAVE		
-			frame1.setSize(1000,5000);
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			frame1.setSize(screenSize.width, screenSize.height-35);
+			
 			
 			//Panel 1 for shuffle button
-			JPanel panel1 = new JPanel(new GridBagLayout());
-			panel1.setBorder(BorderFactory.createTitledBorder("Gameplay"));
+			JPanel gamePanel = new JPanel(new GridBagLayout());
+			gamePanel.setLayout(new BoxLayout(gamePanel, 3));
+			gamePanel.setBorder(BorderFactory.createCompoundBorder());
+			gamePanel.setBackground(Color.GRAY);
+
+			JPanel drawPanel = new JPanel(new GridBagLayout());
+			JPanel drawPanelRInside = new JPanel();
+			drawPanelRInside.setLayout(new BoxLayout(drawPanelRInside, 1));
+			drawPanel.setBorder(BorderFactory.createTitledBorder("Draw"));
+			
+			JPanel tablePanel = new JPanel(new GridBagLayout());
+			tablePanel.setBorder(BorderFactory.createTitledBorder("Table"));
+
+			JPanel playerPanel = new JPanel(new GridBagLayout());
+			playerPanel.setBorder(BorderFactory.createTitledBorder("Player"));
+			
+			JPanel handPanel = new JPanel();
+			handPanel.setLayout(new BoxLayout(handPanel, 1));
+			
+			JTextArea handLabel = new JTextArea(handDeck.show());
 			
 			//Panel 2 for exit button
-			JPanel panel2 = new JPanel(new GridBagLayout());
-			//panel2.setBorder(BorderFactory.createTitledBorder("Exit Game"));
+			JPanel exitPanel = new JPanel(new GridBagLayout());
 			
-			//JTextArea textArea = new JTextArea(timer);
 			
-			JLabel label1 = new JLabel("Test");
+			JLabel drawCardsLeft = new JLabel("Number of Draw Cards Left: ");
+			
+			JPanel leftPanel = new JPanel();
+			leftPanel.setLayout(new BoxLayout(leftPanel, 1));
+			
+			//------------DRAW-----------------
+			JButton drawFrom = new JButton("Draw");
+			drawFrom.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					//handDeck.draw(playDeck);
+					drawFrom.setBackground(Color.cyan);
+					drawFrom.setOpaque(true);
+				}
+				
+			}); //end AL for draw
+			
+			//------------TABLE--------------
+			JLabel leftText = new JLabel("Flip Left");
+			
+			JButton leftBttn = new JButton("Left Deck");
+			leftBttn.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					
+				}
+					
+			});
+			
+			JPanel rightPanel = new JPanel(new GridLayout(0, 2));
+			rightPanel.setLayout(new BoxLayout(rightPanel, 1));
+
+			
+			JLabel rightText = new JLabel("Flip Right");
+			
+			JButton rightBttn = new JButton("Right Deck");
+			rightBttn.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					
+				}
+					
+			});
+			
+			//--------------PLAYER-----------------
+			JTextField playerInput = new JTextField("Enter a card (1-5) from your hand");
+			
+			
+			
 			//---Shuffle Button---
 			JButton shuffleDeck = new JButton("Shuffle");
 			shuffleDeck.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					playDeck.shuffle();
-					shuffleDeck.setBackground(Color.yellow);
-					shuffleDeck.setOpaque(true);
+					handDeck.shuffle();
+					handLabel.setText(handDeck.show());
 				}
 					
 			}); //end AL for shuffle
 			
-			JButton drawFrom = new JButton("Draw");
-			drawFrom.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					handDeck.draw(playDeck);
-					drawFrom.setBackground(Color.cyan);
-					drawFrom.setOpaque(true);
-				}
-					
-			}); //end AL for draw
 			
 			//---Exit Button---
 			JButton exitScreen = new JButton("Exit Game");
@@ -133,23 +210,40 @@ public class NotSoSpeed
 			}); //end AL for exit
 			
 			
-			Insets insets = panel2.getInsets();
+			Insets insets = exitPanel.getInsets();
 			Dimension size = exitScreen.getPreferredSize();
 			exitScreen.setBounds(25 + insets.left, 5 + insets.top,
 					size.width, size.height);
 			
+			drawPanelRInside.add(drawCardsLeft);
+			drawPanelRInside.add(drawFrom);
+			drawPanel.add(drawPanelRInside);
+
+			leftPanel.add(leftText);
+			leftPanel.add(leftBttn);
+			rightPanel.add(rightText);
+			rightPanel.add(rightBttn);
+			tablePanel.add(leftPanel);
+			tablePanel.add(rightPanel);
 			
-			panel1.add(label1);
-			panel1.add(shuffleDeck);
-			panel1.add(drawFrom);
-			panel2.add(exitScreen);
+			//playerPanel.add(label1);
+			handPanel.add(handLabel);
+			playerPanel.add(handPanel);
+			playerPanel.add(playerInput);
+			playerPanel.add(shuffleDeck);
 			
-			frame1.getContentPane().add(BorderLayout.CENTER,panel1);
-			frame1.getContentPane().add(BorderLayout.SOUTH,panel2);
+			gamePanel.add(drawPanel);
+			gamePanel.add(tablePanel);
+			gamePanel.add(playerPanel);
+			
+			exitPanel.add(exitScreen);
+			
+			frame1.getContentPane().add(BorderLayout.CENTER,gamePanel);
+			frame1.getContentPane().add(BorderLayout.SOUTH,exitPanel);
 			frame1.setVisible(true);
 			//frame1.pack();
 		 
-	*/
+	
 
 		
 		

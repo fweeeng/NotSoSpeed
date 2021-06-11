@@ -17,6 +17,7 @@ public class Deck
 	}//end constructor
 			
 	//REMOVE LATER
+	/*
 	public void show()
 	{
 		System.out.println(getType() + ": ");
@@ -26,7 +27,7 @@ public class Deck
 		}
 		System.out.println();
 	}
-	
+	*/
 	
 	
 	public void shuffle()

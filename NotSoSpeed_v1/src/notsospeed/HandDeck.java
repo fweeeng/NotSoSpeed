@@ -10,7 +10,7 @@ public class HandDeck extends Deck {
 		//this.total = total;
 	}
 	
-	public void show()
+	public void systemShow()
 	{
 		System.out.println(getType() + ": ");
 		for(int i = 0; i < size(); i++)
@@ -18,6 +18,16 @@ public class HandDeck extends Deck {
 			System.out.println(getCard(i));
 		}
 		System.out.println();
+	}
+	
+	public String show()
+	{
+		String hand = "";
+		for(int i = 0; i < size(); i++)
+		{
+			hand += getCard(i) + "\n";
+		}
+		return hand;
 	}
 	
 	//getters
