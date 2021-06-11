@@ -40,10 +40,10 @@ public class NotSoSpeed
 		handDeck.show();
 		
 		
-		Deck leftDeck = new TableDeck("Left Deck");
+		Deck leftDeck = new Deck("Left Deck");
 		drawDeck.deal(leftDeck, 1);
 		
-		Deck rightDeck = new TableDeck("Right Deck");
+		Deck rightDeck = new Deck("Right Deck");
 		drawDeck.deal(rightDeck, 1);
 		
 		Deck leftover = new Deck("Leftover Deck");
