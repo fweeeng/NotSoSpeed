@@ -20,67 +20,32 @@ import javax.swing.JTextField;
 
 public class NotSoSpeed 
 {
-
+	static JTextField playerInput = new JTextField("");
+	
 	public static void main(String[] args) 
 	{
 		
 		
-		System.out.println("Welcome to Not So Speed!");
 		//include start (optional)
 		//4 decks
 		//Create playing deck
-		Deck drawDeck = new DrawDeck("Draw Deck");
-		drawDeck.shuffle();
+		Deck dealDeck = new DrawDeck("Deal Deck");
+		dealDeck.shuffle();
 		
 		HandDeck handDeck = new HandDeck("Player Hand");
-		drawDeck.deal(handDeck, 5);
+		dealDeck.deal(handDeck, 5);
 		handDeck.show();
 		
 		
-		Deck leftDeck = new Deck("Left Deck");
-		drawDeck.deal(leftDeck, 1);
+		TableDeck leftDeck = new TableDeck("Left Deck");
+		dealDeck.deal(leftDeck, 1);
 		
-		Deck rightDeck = new Deck("Right Deck");
-		drawDeck.deal(rightDeck, 1);
+		TableDeck rightDeck = new TableDeck("Right Deck");
+		dealDeck.deal(rightDeck, 1);
 		
-		Deck leftover = new Deck("Leftover Deck");
-		drawDeck.dealLeftover(leftover);
-		
-		//TEST AREA
-		//System.out.println("# of cards left: " + leftover.size());
-		//System.out.println("Hand Card Total: " + handDeck.cardTotal());
-		//System.out.println("value of first: " + handDeck.getCard(0).getValue());
-		
-		//System.out.println();
-		//handDeck.place(0, leftDeck);
-		//leftDeck.show();
-		//-----------GAMEPLAY------------
-		//Display hand
-		/*
-		System.out.println("Left Deck: " + leftDeck.getLast());
-		System.out.println("Right Deck: " + rightDeck.getLast());
-		handDeck.show();
-		System.out.println("Select a card from your hand:");
-		int card = scan.nextInt();
-		System.out.println("Select deck to place card (left = 'l' or right = 'r'):");
-		String deck = scan.next();
-		if(deck.equals("r"))
-		{
-			handDeck.place(card, rightDeck);
-		}
-		else if(deck.equals("l"))
-		{
-			handDeck.place(card, leftDeck);
-		}
-		else
-		{
-			System.out.println("Invalid");
-		}
-		*/
-		
-		
-		
-		
+		Deck drawDeck = new Deck("Deal Deck");
+		dealDeck.dealLeftover(drawDeck);
+			
 		/*
 		 * 1. Create decks
 		 * 2. Display player hand
@@ -92,22 +57,18 @@ public class NotSoSpeed
 		 * Display: hand, table deck top card values, draw deck count
 		 */
 		
-		
-		
-		
-		
 		  //-----------------JAVA SWING GUI----------------
 			
 			JFrame frame1 = new JFrame("Not So Speed");
 			frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //MUST HAVE		
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-			frame1.setSize(screenSize.width, screenSize.height-35);
+			frame1.setSize(screenSize.width/2, screenSize.height-35);
 			
 			
 			//Panel 1 for shuffle button
 			JPanel gamePanel = new JPanel(new GridBagLayout());
 			gamePanel.setLayout(new BoxLayout(gamePanel, 3));
-			gamePanel.setBorder(BorderFactory.createCompoundBorder());
+			gamePanel.setBorder(BorderFactory.createTitledBorder("NOT SO SPEED"));
 			gamePanel.setBackground(Color.GRAY);
 
 			JPanel drawPanel = new JPanel(new GridBagLayout());
@@ -124,81 +85,203 @@ public class NotSoSpeed
 			JPanel handPanel = new JPanel();
 			handPanel.setLayout(new BoxLayout(handPanel, 1));
 			
-			JTextArea handLabel = new JTextArea(handDeck.show());
+			JPanel enterPanel = new JPanel();
+			enterPanel.setLayout(new BoxLayout(enterPanel, 1));
+			
+			JPanel flipPanel = new JPanel();
+			flipPanel.setLayout(new BoxLayout(flipPanel, 1));
 			
 			//Panel 2 for exit button
 			JPanel exitPanel = new JPanel(new GridBagLayout());
 			
 			
-			JLabel drawCardsLeft = new JLabel("Number of Draw Cards Left: ");
+			JLabel drawCardsLeft = new JLabel("Cards Left: ");
 			
 			JPanel leftPanel = new JPanel();
 			leftPanel.setLayout(new BoxLayout(leftPanel, 1));
 			
-			//------------DRAW-----------------
-			JButton drawFrom = new JButton("Draw");
-			drawFrom.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					//handDeck.draw(playDeck);
-					drawFrom.setBackground(Color.cyan);
-					drawFrom.setOpaque(true);
-				}
-				
-			}); //end AL for draw
-			
-			//------------TABLE--------------
-			JLabel leftText = new JLabel("__");
-			
-			JButton leftBttn = new JButton("Left Deck");
-			leftBttn.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					leftText.setText(leftDeck.getLast().getSuit() + " " + leftDeck.getLast().getWordValue());
-				}
-					
-			});
-			
 			JPanel rightPanel = new JPanel(new GridLayout(0, 2));
 			rightPanel.setLayout(new BoxLayout(rightPanel, 1));
-
-			
-			JLabel rightText = new JLabel("__");
-			
-			JButton rightBttn = new JButton("Right Deck");
-			rightBttn.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					rightText.setText(rightDeck.getLast().getSuit() + " " + rightDeck.getLast().getWordValue());
-
-				}
-					
-			});
 			
 			//--------------PLAYER-----------------
-			JTextField playerInput = new JTextField("Enter a card (1-5) from your hand");
+			JTextArea handLabel = new JTextArea();
+			handLabel.setEditable(false);
+			JLabel enterArea = new JLabel("Enter a card (1-5) from your hand");
 			
-			
-			
+			playerInput.setPreferredSize(new Dimension(50, 25));
 			//---Shuffle Button---
-			JButton shuffleDeck = new JButton("Shuffle");
-			shuffleDeck.addActionListener(new ActionListener()
+			JButton shuffleBttn = new JButton("Shuffle");
+			shuffleBttn.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
 					handDeck.shuffle();
 					handLabel.setText(handDeck.show());
 				}
-					
+				
 			}); //end AL for shuffle
 			
 			
+			
+			//------------DRAW-----------------
+			JButton drawBttn = new JButton("Draw");
+			drawBttn.setEnabled(false);
+			drawBttn.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					if(handDeck.verifyAmt())
+					{
+						if(drawDeck.isEmpty())
+						{
+							drawBttn.setEnabled(false);
+						}
+						handDeck.draw(drawDeck);
+						handLabel.setText(handDeck.show());
+						drawCardsLeft.setText("Cards Left: " + String.valueOf(drawDeck.size()));
+					}
+					else
+					{
+						handLabel.setText(handDeck.show());
+					}
+					
+				}
+				
+			}); //end AL for draw
+			
+			//------------TABLE--------------
+			
+			
+			JLabel leftText = new JLabel("_");
+			JButton leftBttn = new JButton("Left Deck");
+			leftBttn.setEnabled(false);
+			
+			JLabel rightText = new JLabel("_");
+			JButton rightBttn = new JButton("Right Deck");
+			rightBttn.setEnabled(false);
+
+			JButton staleMateBttn = new JButton("Stalemate");
+			staleMateBttn.setEnabled(false);
+			
+			JButton flipBttn = new JButton("Flip to start");
+			Color lime = new Color(205, 255, 0);
+			flipBttn.setBackground(lime);
+			flipBttn.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					leftText.setText(leftDeck.getLast().getSuit() + " " + leftDeck.getLast().getWordValue());
+					rightText.setText(rightDeck.getLast().getSuit() + " " + rightDeck.getLast().getWordValue());
+					flipBttn.setVisible(false);
+					leftBttn.setEnabled(true);
+					rightBttn.setEnabled(true);
+					drawBttn.setEnabled(true);
+					staleMateBttn.setEnabled(true);
+					handLabel.setText(handDeck.show());
+					drawCardsLeft.setText("Cards Left: " + String.valueOf(drawDeck.size()));
+				}
+				
+			});
+			
+			staleMateBttn.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					if(drawDeck.size() == 1)
+					{
+						leftDeck.draw(drawDeck);
+						leftText.setText(leftDeck.getLast().getSuit() + " " + leftDeck.getLast().getWordValue());
+						drawCardsLeft.setText("Cards Left: " + String.valueOf(drawDeck.size()));
+						staleMateBttn.setEnabled(false);
+						drawBttn.setEnabled(false);
+					}
+					leftDeck.draw(drawDeck);
+					leftText.setText(leftDeck.getLast().getSuit() + " " + leftDeck.getLast().getWordValue());
+					rightDeck.draw(drawDeck);
+					rightText.setText(rightDeck.getLast().getSuit() + " " + rightDeck.getLast().getWordValue());
+					drawCardsLeft.setText("Cards Left: " + String.valueOf(drawDeck.size()));
+
+				}
+				
+			});
+			
+			/*
+			JLabel enterOutput = new JLabel("Chosen card: ");
+			JButton enterBttn = new JButton("Enter");
+			enterBttn.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					System.out.println(getInput());
+					enterOutput.setText("Chosen card: " + String.valueOf(getInput()));
+				}
+					
+			});
+			*/
+			if(handDeck.isEmpty() && drawDeck.isEmpty())
+			{
+				leftText.setText("Choose which deck has the higher total value to WIN");
+				rightText.setText("");
+				//if(leftDeck.higherDeck(rightDeck))
+			}
+			leftBttn.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					if(handDeck.isEmpty() && drawDeck.isEmpty())
+					{
+						if(leftDeck.compare(rightDeck))
+						{
+							leftText.setText("You win!");
+							rightBttn.setEnabled(false);
+						}
+						else
+						{
+							leftText.setText("Wrong, you lose");
+							leftBttn.setEnabled(false);
+							rightBttn.setEnabled(false);
+						}
+					}
+					handDeck.place(getInput()-1, leftDeck);
+					handLabel.setText(handDeck.show());
+					leftText.setText(leftDeck.getLast().getSuit() + " " + leftDeck.getLast().getWordValue());
+					playerInput.setText("");
+				}
+					
+			});
+			
+			rightBttn.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{	
+					if(handDeck.isEmpty() && drawDeck.isEmpty())
+					{
+						if(rightDeck.compare(leftDeck))
+						{
+							leftText.setText("You win!");
+							leftBttn.setEnabled(false);
+						}
+						else
+						{
+							leftText.setText("Wrong, you lose");
+							leftBttn.setEnabled(false);
+							rightBttn.setEnabled(false);
+						}
+					}
+
+					handDeck.place(getInput()-1, rightDeck);
+					handLabel.setText(handDeck.show());
+					rightText.setText(rightDeck.getLast().getSuit() + " " + rightDeck.getLast().getWordValue());
+					playerInput.setText("");
+				}
+						
+			});
+			
+			
+			
 			//---Exit Button---
-			JButton exitScreen = new JButton("Exit Game");
-			exitScreen.addActionListener(new ActionListener()
+			JButton exitBttn = new JButton("Exit Game");
+			exitBttn.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
@@ -209,39 +292,53 @@ public class NotSoSpeed
 			
 			
 			drawPanelRInside.add(drawCardsLeft);
-			drawPanelRInside.add(drawFrom);
+			drawPanelRInside.add(drawBttn);
 			drawPanel.add(drawPanelRInside);
 
 			leftPanel.add(leftText);
 			leftPanel.add(leftBttn);
 			rightPanel.add(rightText);
 			rightPanel.add(rightBttn);
+			tablePanel.add(staleMateBttn);
 			tablePanel.add(leftPanel);
 			tablePanel.add(rightPanel);
+			flipPanel.add(flipBttn);
+			tablePanel.add(flipPanel);
 			
 			//playerPanel.add(label1);
 			handPanel.add(handLabel);
-			handPanel.add(shuffleDeck);
+			handPanel.add(shuffleBttn);
+			enterPanel.add(enterArea);
+			enterPanel.add(getTextF());
+			//enterPanel.add(enterBttn);
+			//enterPanel.add(enterOutput);
 			playerPanel.add(handPanel);
-			playerPanel.add(playerInput);
+			playerPanel.add(enterPanel);
 			
 			gamePanel.add(drawPanel);
 			gamePanel.add(tablePanel);
 			gamePanel.add(playerPanel);
 			
-			exitPanel.add(exitScreen);
+			exitPanel.add(exitBttn);
 			
 			frame1.getContentPane().add(BorderLayout.CENTER,gamePanel);
 			frame1.getContentPane().add(BorderLayout.SOUTH,exitPanel);
 			frame1.setVisible(true);
 			//frame1.pack();
 		 
-	
-
-		
-		
-		
 		
 	}
+	
+		public static int getInput()
+		{
+			String strInput = getTextF().getText();
+			int input = Integer.valueOf(strInput);
+			return input;
+		}
+		public static JTextField getTextF()
+		{
+			return playerInput;
+		}
+		
 
 }

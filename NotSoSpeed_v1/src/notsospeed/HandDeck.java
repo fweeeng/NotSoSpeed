@@ -2,7 +2,6 @@ package notsospeed;
 
 public class HandDeck extends Deck {
 
-	private int total;
 	
 	public HandDeck(String type)
 	{
@@ -29,12 +28,6 @@ public class HandDeck extends Deck {
 			hand += s + "- " + getCard(i) + "\n";
 		}
 		return hand;
-	}
-	
-	//getters
-	public int getTotal()
-	{
-		return total;
 	}
 	
 	public boolean checkPlacement(int index, Deck deck)
@@ -65,6 +58,16 @@ public class HandDeck extends Deck {
 		{
 			System.out.println("Cannot place card. Choose another");
 		}
+	}
+	
+	public boolean verifyAmt()
+	{
+		boolean size = false;
+		if(size() < 5)
+		{
+			size = true;
+		}
+		return size;
 	}
 	
 

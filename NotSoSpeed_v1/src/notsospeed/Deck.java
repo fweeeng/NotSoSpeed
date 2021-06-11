@@ -15,19 +15,6 @@ public class Deck
 		setCards(new ArrayList<Card>());
 		this.type = type;
 	}//end constructor
-			
-	//REMOVE LATER
-	/*
-	public void show()
-	{
-		System.out.println(getType() + ": ");
-		for(int i = 0; i < size(); i++)
-		{
-			System.out.println(getCard(i));
-		}
-		System.out.println();
-	}
-	*/
 	
 	
 	public void shuffle()
