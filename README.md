@@ -8,3 +8,9 @@ The player begins by flipping the first two table cards to see their hand. The p
 
 ## Special Feature
 Shuffle Button: Player can shuffle what’s in their hand if they can’t find a card to place
+
+## Note
+Ace = 1
+Jack = 11
+Queen = 12
+King = 13
