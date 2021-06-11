@@ -16,16 +16,14 @@ public class Card
 	{
 		return value.getValue();
 	}
-	/*
-	public int getVal()
+
+	public Value getWordValue()
 	{
-		//card = Integer.parseInt(value[i]);
+		return value;
 	}
-	*/
-	
-	public Suit getSuit()
+	public String getSuit()
 	{
-		return this.suit;
+		return suit.getSuit();
 	}
 	
 	

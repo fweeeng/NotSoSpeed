@@ -25,7 +25,8 @@ public class HandDeck extends Deck {
 		String hand = "";
 		for(int i = 0; i < size(); i++)
 		{
-			hand += getCard(i) + "\n";
+			String s = String.valueOf(i+1);
+			hand += s + "- " + getCard(i) + "\n";
 		}
 		return hand;
 	}

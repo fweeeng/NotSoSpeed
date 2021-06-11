@@ -2,7 +2,7 @@ package notsospeed;
 
 public enum Suit 
 {
-	HEART("@"), DIAMOND("#"), CLOVE("%"), SPADE("^");
+	HEART("HEART"), DIAMOND("DIAMOND"), CLOVE("CLOVE"), SPADE("SPADE");
 	
 	private String suit;
 	

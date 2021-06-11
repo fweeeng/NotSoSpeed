@@ -5,11 +5,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -27,7 +25,6 @@ public class NotSoSpeed
 	{
 		
 		
-		Scanner scan = new Scanner(System.in);
 		System.out.println("Welcome to Not So Speed!");
 		//include start (optional)
 		//4 decks
@@ -152,14 +149,14 @@ public class NotSoSpeed
 			}); //end AL for draw
 			
 			//------------TABLE--------------
-			JLabel leftText = new JLabel("Flip Left");
+			JLabel leftText = new JLabel("__");
 			
 			JButton leftBttn = new JButton("Left Deck");
 			leftBttn.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					
+					leftText.setText(leftDeck.getLast().getSuit() + " " + leftDeck.getLast().getWordValue());
 				}
 					
 			});
@@ -168,14 +165,15 @@ public class NotSoSpeed
 			rightPanel.setLayout(new BoxLayout(rightPanel, 1));
 
 			
-			JLabel rightText = new JLabel("Flip Right");
+			JLabel rightText = new JLabel("__");
 			
 			JButton rightBttn = new JButton("Right Deck");
 			rightBttn.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					
+					rightText.setText(rightDeck.getLast().getSuit() + " " + rightDeck.getLast().getWordValue());
+
 				}
 					
 			});
@@ -210,11 +208,6 @@ public class NotSoSpeed
 			}); //end AL for exit
 			
 			
-			Insets insets = exitPanel.getInsets();
-			Dimension size = exitScreen.getPreferredSize();
-			exitScreen.setBounds(25 + insets.left, 5 + insets.top,
-					size.width, size.height);
-			
 			drawPanelRInside.add(drawCardsLeft);
 			drawPanelRInside.add(drawFrom);
 			drawPanel.add(drawPanelRInside);
@@ -228,9 +221,9 @@ public class NotSoSpeed
 			
 			//playerPanel.add(label1);
 			handPanel.add(handLabel);
+			handPanel.add(shuffleDeck);
 			playerPanel.add(handPanel);
 			playerPanel.add(playerInput);
-			playerPanel.add(shuffleDeck);
 			
 			gamePanel.add(drawPanel);
 			gamePanel.add(tablePanel);
